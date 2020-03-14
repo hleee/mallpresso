@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.token">
+	<resultMap id="tokenResult" type="tokenVO">
+		<result property="token" column="token" />
+		<result property="email" column="email" />
+		<result property="createdAt" column="created_at" />
+	</resultMap>
+
+	<insert id="insertOneToken" parameterType="tokenVO">
+    <![CDATA[
+      INSERT INTO token(token, email)
+      VALUES(#{token}, #{email})
+    ]]>
+	</insert>
+
+	<select id="selectOneTokenRowByToken" resultMap="tokenResult"
+		parameterType="tokenVO">
+    <![CDATA[
+      SELECT * FROM token
+      WHERE token = #{token}
+    ]]>
+	</select>
+
+</mapper>
+	

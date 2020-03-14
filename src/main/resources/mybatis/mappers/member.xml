@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap id="memberResult" type="memberVO">
+		<result property="id" column="id" />
+		<result property="email" column="email" />
+		<result property="name" column="name" />
+		<result property="birthday" column="birthday" />
+		<result property="password" column="password" />
+		<result property="sex" column="sex" />
+		<result property="createdAt" column="created_at" />
+	</resultMap>
+
+	<insert id="insertOneMember" parameterType="memberVO"
+		useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+      INSERT INTO member(email, name, birthday, password, sex)
+      VALUES(#{email}, #{name}, #{birthday}, #{password}, #{sex})
+    ]]>
+	</insert>
+
+	<select id="selectOneMemberByID" resultMap="memberResult"
+		parameterType="Long">
+    <![CDATA[
+      SELECT * FROM member
+      WHERE id=#{id}
+    ]]>
+	</select>
+
+	<select id="selectAllMembers" resultMap="memberResult">
+    <![CDATA[
+      SELECT * FROM member
+    ]]>
+	</select>
+
+</mapper>
