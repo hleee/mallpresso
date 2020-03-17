@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codepresso.mallpresso.domain.MemberVO;
 import com.codepresso.mallpresso.domain.ResponseVO;
-import com.codepresso.mallpresso.domain.TokenVO;
 import com.codepresso.mallpresso.service.TokenService;
 
 @RestController
@@ -20,16 +19,15 @@ public class TokenController {
 	static Logger logger = LoggerFactory.getLogger(TokenController.class);
 
 	@Autowired
-	public TokenVO tokenVO;
-
-	@Autowired
 	public TokenService tokenService;
 
-	@Autowired
-	public ResponseVO responseVO;
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public ResponseVO insertOneEmailCheckToken(@RequestBody MemberVO emailOnlyVO) throws Exception {
+		return tokenService.insertOneEmailCheckToken(emailOnlyVO);
+	}
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public ResponseVO insertOneToken(@RequestBody MemberVO memberVO) throws Exception {
-		return tokenService.insertOneToken(memberVO);
+	public ResponseVO insertOneLogInToken(@RequestBody MemberVO memberVO) throws Exception {
+		return tokenService.insertOneLogInToken(memberVO);
 	}
 }

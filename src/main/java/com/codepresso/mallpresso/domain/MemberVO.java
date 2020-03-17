@@ -1,7 +1,5 @@
 package com.codepresso.mallpresso.domain;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,10 +15,10 @@ import lombok.ToString;
 @ToString
 public class MemberVO {
 
-	private Long id;
+	private long id;
 	private String email;
 	private String name;
-	private Date birthday;
+	private String birthday;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	@JsonProperty(access = Access.WRITE_ONLY)

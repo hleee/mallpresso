@@ -30,6 +30,22 @@
     ]]>
 	</select>
 
+	<select id="selectOneMemberByEmailAndPassword"
+		resultMap="memberResult" parameterType="memberVO">
+    <![CDATA[
+      SELECT * FROM member
+      WHERE email=#{email} AND password=#{password}
+    ]]>
+	</select>
+
+	<select id="selectOneMemberByEmail" resultMap="memberResult"
+		parameterType="String">
+    <![CDATA[
+      SELECT * FROM member
+      WHERE email=#{email}
+    ]]>
+	</select>
+
 	<select id="selectAllMembers" resultMap="memberResult">
     <![CDATA[
       SELECT * FROM member

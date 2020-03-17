@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.basket">
+	<resultMap id="basketResult" type="basketVO">
+		<result property="id" column="id" />
+		<result property="memberID" column="member_id" />
+		<result property="productID" column="product_id" />
+		<result property="createdAt" column="created_at" />
+	</resultMap>
+
+	<select id="selectBasketByMemberID" resultMap="basketResult"
+		parameterType="Long">
+    <![CDATA[
+      SELECT * FROM basket
+      WHERE member_id=#{memberID}
+    ]]>
+	</select>
+
+</mapper>

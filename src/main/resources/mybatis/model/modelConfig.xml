@@ -16,5 +16,7 @@
 			alias="bannerVO" />
 		<typeAlias type="com.codepresso.mallpresso.domain.BasketVO"
 			alias="basketVO" />
+		<typeAlias type="com.codepresso.mallpresso.domain.DuplicateVO"
+			alias="duplicateVO" />
 	</typeAliases>
 </configuration>

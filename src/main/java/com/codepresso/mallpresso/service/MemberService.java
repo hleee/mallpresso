@@ -3,7 +3,6 @@ package com.codepresso.mallpresso.service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.codepresso.mallpresso.domain.MemberVO;
 import com.codepresso.mallpresso.domain.ResponseVO;
 import com.codepresso.mallpresso.repository.MemberDAO;
+import com.codepresso.mallpresso.repository.TokenDAO;
 
 @Service
 public class MemberService {
@@ -24,38 +24,43 @@ public class MemberService {
 	public MemberDAO memberDAO;
 
 	@Autowired
-	public MemberVO memberVO;
+	public TokenDAO tokenDAO;
 
-	@Autowired
-	public ResponseVO responseVO;
-
-	public ResponseVO insertOneMember(MemberVO memberVO) throws Exception {
-		String emailEntered = memberVO.getEmail();
-		List<MemberVO> memberVOList = memberDAO.selectAllMembers();
-		for (int i = 0; i < memberVOList.size(); i++) {
-			String email = memberVOList.get(i).getEmail();
-			if (emailEntered == email) {
-				logger.info("This email already exists.");
-			} else {
-				logger.info("This email is available.");
-			}
-		}
-		if (memberVO.getPassword() == memberVO.getPasswordReentered()) {
-			logger.info("OK.");
+	public ResponseVO insertOneMember(String emailCheckToken, MemberVO memberVO) throws Exception {
+		ResponseVO responseVO = new ResponseVO();
+		MemberVO emptyMemberVO = new MemberVO();
+		if (emailCheckToken == null) {
+			logger.info("Check for email duplication.");
+			responseVO.setCode(HttpStatus.BAD_REQUEST.value());
+			responseVO.setMessage("Failure");
+			responseVO.setData(emptyMemberVO);
+			return responseVO;
 		} else {
-			logger.info("Please confirm your password.");
+			logger.info("Email OK.");
+		}
+		if (memberVO.getPassword().equals(memberVO.getPasswordReentered())) {
+			logger.info("Password OK.");
+		} else {
+			logger.info("Password doesn't match.");
+			responseVO.setCode(HttpStatus.BAD_REQUEST.value());
+			responseVO.setMessage("Failure");
+			responseVO.setData(emptyMemberVO);
+			return responseVO;
 		}
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		Date todaysDate = new Date();
 		String todaysDateFormatted = dateFormat.format(todaysDate);
 		int todaysDateInt = Integer.parseInt(todaysDateFormatted);
-		Date birthdayEntered = memberVO.getBirthday();
-		String birthdayEnteredFormatted = dateFormat.format(birthdayEntered);
-		int birthdayEnteredInt = Integer.parseInt(birthdayEnteredFormatted);
-		if (todaysDateInt - birthdayEnteredInt <= 70000) {
-			logger.info("You do not meet the minimum age requirement of our terms and conditions.");
+		String birthdayEntered = memberVO.getBirthday().replaceAll("\\p{Punct}", "");
+		int birthdayEnteredInt = Integer.parseInt(birthdayEntered);
+		if (todaysDateInt - birthdayEnteredInt < 80000) {
+			logger.info("Underage.");
+			responseVO.setCode(HttpStatus.BAD_REQUEST.value());
+			responseVO.setMessage("Failure");
+			responseVO.setData(emptyMemberVO);
+			return responseVO;
 		} else {
-			logger.info("OK.");
+			logger.info("Age OK.");
 		}
 		memberDAO.insertOneMember(memberVO);
 		memberVO = memberDAO.selectOneMemberByID(memberVO.getId());
@@ -64,5 +69,4 @@ public class MemberService {
 		responseVO.setData(memberVO);
 		return responseVO;
 	}
-
 }

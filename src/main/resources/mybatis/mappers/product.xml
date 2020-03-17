@@ -13,62 +13,23 @@
 		<result property="createdAt" column="created_at" />
 	</resultMap>
 
-	<select id="selectOnePostById" resultMap="postResult"
+	<select id="selectSixProducts" resultMap="productResult"
 		parameterType="Long">
-    <![CDATA[
-      SELECT * FROM post
-      WHERE id=#{id}
-    ]]>
-	</select>
-
-	<insert id="insertOnePost" parameterType="postVo"
-		useGeneratedKeys="true" keyProperty="id">
-    <![CDATA[
-      INSERT INTO post(user_id, title, content)
-      VALUES(#{userId}, #{title}, #{content})
-    ]]>
-	</insert>
-
-	<select id="selectAllPosts" resultMap="postResult">
-    <![CDATA[
-      SELECT * FROM post
+	<![CDATA[ 
+	  SELECT * FROM product
+	  LEFT JOIN product
+	  ON product.id=b
       ORDER BY id DESC
-    ]]>
+      LIMIT 6
+      OFFSET #{lastProductID}
+	]]>
 	</select>
 
-	<select id="selectPostsByUserId" resultMap="postResult"
-		parameterType="Long">
+	<select id="selectAllProducts" resultMap="productResult">
     <![CDATA[
-      SELECT * FROM post
-      WHERE user_id = #{userId}
-      ORDER BY id DESC
+      SELECT * FROM product
     ]]>
 	</select>
-
-	<select id="selectOnePostByUserId" resultMap="postResult"
-		parameterType="Long">
-    <![CDATA[
-      SELECT * FROM post
-      WHERE user_id = #{userId}
-      ORDER BY id DESC
-      LIMIT 1
-    ]]>
-	</select>
-
-	<delete id="deleteOnePost" parameterType="Long">
-    <![CDATA[
-      DELETE FROM post
-      WHERE id = #{id}
-    ]]>
-	</delete>
-
-	<update id="updateOnePost" parameterType="postVo">
-    <![CDATA[
-      UPDATE post
-      SET title = #{title}, content = #{content}
-      WHERE id = #{id}
-    ]]>
-	</update>
 
 </mapper>
 	

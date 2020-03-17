@@ -5,23 +5,23 @@
 
 <mapper namespace="mapper.token">
 	<resultMap id="tokenResult" type="tokenVO">
-		<result property="token" column="token" />
+		<result property="logInToken" column="token" />
 		<result property="email" column="email" />
 		<result property="createdAt" column="created_at" />
 	</resultMap>
 
-	<insert id="insertOneToken" parameterType="tokenVO">
+	<insert id="insertOneLogInToken" parameterType="tokenVO">
     <![CDATA[
       INSERT INTO token(token, email)
-      VALUES(#{token}, #{email})
+      VALUES(#{logInToken}, #{email})
     ]]>
 	</insert>
 
-	<select id="selectOneTokenRowByToken" resultMap="tokenResult"
+	<select id="selectOneRowByLogInToken" resultMap="tokenResult"
 		parameterType="tokenVO">
     <![CDATA[
       SELECT * FROM token
-      WHERE token = #{token}
+      WHERE token = #{logInToken}
     ]]>
 	</select>
 

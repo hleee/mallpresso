@@ -10,10 +10,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class TokenVO {
+public class BasketVO {
 
-	private String logInToken;
-	private String email;
+	private long id;
+	private long memberId;
+	private long productId;
 	private String createdAt;
 
 }

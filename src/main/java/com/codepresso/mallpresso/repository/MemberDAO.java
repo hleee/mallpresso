@@ -3,8 +3,6 @@ package com.codepresso.mallpresso.repository;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -13,8 +11,6 @@ import com.codepresso.mallpresso.domain.MemberVO;
 
 @Repository
 public class MemberDAO {
-
-	static Logger logger = LoggerFactory.getLogger(MemberDAO.class);
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -27,8 +23,15 @@ public class MemberDAO {
 		return sqlSession.selectOne("mapper.member.selectOneMemberByID", id);
 	}
 
+	public MemberVO selectOneMemberByEmailAndPassword(MemberVO memberVO) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.selectOneMemberByEmailAndPassword", memberVO);
+	}
+	
+	public MemberVO selectOneMemberByEmail(String email) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.selectOneMemberByEmail", email);
+	}
+
 	public List<MemberVO> selectAllMembers() throws DataAccessException {
 		return sqlSession.selectList("mapper.member.selectAllMembers");
 	}
-
 }

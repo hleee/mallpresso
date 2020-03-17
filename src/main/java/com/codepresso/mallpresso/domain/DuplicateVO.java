@@ -10,10 +10,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class TokenVO {
+public class DuplicateVO {
 
-	private String logInToken;
+	private String emailCheckToken;
 	private String email;
 	private String createdAt;
-
+	
 }
