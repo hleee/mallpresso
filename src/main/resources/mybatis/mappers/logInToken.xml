@@ -3,24 +3,24 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.token">
-	<resultMap id="tokenResult" type="tokenVO">
+<mapper namespace="mapper.logInToken">
+	<resultMap id="logInTokenResult" type="logInTokenVO">
 		<result property="logInToken" column="token" />
 		<result property="email" column="email" />
 		<result property="createdAt" column="created_at" />
 	</resultMap>
 
-	<insert id="insertOneLogInToken" parameterType="tokenVO">
+	<insert id="insertOneLogInToken" parameterType="logInTokenVO">
     <![CDATA[
-      INSERT INTO token(token, email)
+      INSERT INTO log_in_token(token, email)
       VALUES(#{logInToken}, #{email})
     ]]>
 	</insert>
 
-	<select id="selectOneRowByLogInToken" resultMap="tokenResult"
-		parameterType="tokenVO">
+	<select id="selectOneRowByLogInToken" resultMap="logInTokenResult"
+		parameterType="logInTokenVO">
     <![CDATA[
-      SELECT * FROM token
+      SELECT * FROM log_in_token
       WHERE token = #{logInToken}
     ]]>
 	</select>

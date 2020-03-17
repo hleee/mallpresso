@@ -3,24 +3,24 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.duplicate">
-	<resultMap id="duplicateResult" type="duplicateVO">
+<mapper namespace="mapper.emailCheckToken">
+	<resultMap id="emailCheckTokenResult" type="emailCheckTokenVO">
 		<result property="emailCheckToken" column="token" />
 		<result property="email" column="email" />
 		<result property="createdAt" column="created_at" />
 	</resultMap>
 
-	<insert id="insertOneEmailCheckToken" parameterType="duplicateVO">
+	<insert id="insertOneEmailCheckToken" parameterType="emailCheckTokenVO">
     <![CDATA[
-      INSERT INTO duplicate(token, email)
+      INSERT INTO email_check_token(token, email)
       VALUES(#{emailCheckToken}, #{email})
     ]]>
 	</insert>
 
-	<select id="selectOneRowByEmailCheckToken" resultMap="duplicateResult"
-		parameterType="duplicateVO">
+	<select id="selectOneRowByEmailCheckToken" resultMap="emailCheckTokenResult"
+		parameterType="emailCheckTokenVO">
     <![CDATA[
-      SELECT * FROM duplicate
+      SELECT * FROM email_check_token
       WHERE token = #{emailCheckToken}
     ]]>
 	</select>

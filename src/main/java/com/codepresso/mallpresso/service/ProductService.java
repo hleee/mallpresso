@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codepresso.mallpresso.domain.BasketVO;
+import com.codepresso.mallpresso.domain.LogInTokenVO;
 import com.codepresso.mallpresso.domain.MemberVO;
 import com.codepresso.mallpresso.domain.ProductVO;
 import com.codepresso.mallpresso.domain.ResponseVO;
-import com.codepresso.mallpresso.domain.TokenVO;
 import com.codepresso.mallpresso.repository.BasketDAO;
 import com.codepresso.mallpresso.repository.MemberDAO;
 import com.codepresso.mallpresso.repository.ProductDAO;
@@ -29,35 +29,24 @@ public class ProductService {
 	public ProductDAO productDAO;
 
 	@Autowired
-	public MemberVO memberVO;
-
-	@Autowired
-	public ProductVO productVO;
-
-	@Autowired
 	public TokenDAO tokenDAO;
 
 	@Autowired
 	public BasketDAO basketDAO;
 
-	@Autowired
-	public BasketVO basketVO;
-
-	@Autowired
-	public TokenVO tokenVO;
-
-	@Autowired
-	public ResponseVO responseVO;
-
+	// 여섯 개씩 조회
 	public ResponseVO selectSixProducts(String logInToken, long lastProductID) throws Exception {
-		tokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
-		String email = tokenVO.getEmail();
+		ResponseVO responseVO = new ResponseVO();
+		LogInTokenVO logInTokenVO = new LogInTokenVO();
+		MemberVO memberVO = new MemberVO();
+		logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
+		String email = logInTokenVO.getEmail();
 		memberVO = memberDAO.selectOneMemberByEmail(email);
 		long memberID = memberVO.getId();
 		List<BasketVO> basketVOList = basketDAO.selectBasketByMemberID(memberID);
 		List<ProductVO> productVOList = productDAO.selectSixProducts(lastProductID);
 		for (int i = 0; i < basketVOList.size(); i++) {
-			
+
 		}
 		return responseVO;
 	}

@@ -8,15 +8,15 @@
 	<typeAliases>
 		<typeAlias type="com.codepresso.mallpresso.domain.MemberVO"
 			alias="memberVO" />
-		<typeAlias type="com.codepresso.mallpresso.domain.TokenVO"
-			alias="tokenVO" />
+		<typeAlias type="com.codepresso.mallpresso.domain.LogInTokenVO"
+			alias="logInTokenVO" />
 		<typeAlias type="com.codepresso.mallpresso.domain.ProductVO"
 			alias="productVO" />
 		<typeAlias type="com.codepresso.mallpresso.domain.BannerVO"
 			alias="bannerVO" />
 		<typeAlias type="com.codepresso.mallpresso.domain.BasketVO"
 			alias="basketVO" />
-		<typeAlias type="com.codepresso.mallpresso.domain.DuplicateVO"
-			alias="duplicateVO" />
+		<typeAlias type="com.codepresso.mallpresso.domain.EmailCheckTokenVO"
+			alias="emailCheckTokenVO" />
 	</typeAliases>
 </configuration>

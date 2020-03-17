@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.codepresso.mallpresso.domain.TokenVO;
+import com.codepresso.mallpresso.domain.EmailCheckTokenVO;
+import com.codepresso.mallpresso.domain.LogInTokenVO;
 
 @Repository
 public class TokenDAO {
@@ -13,11 +14,19 @@ public class TokenDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int insertOneLogInToken(TokenVO tokenVO) throws DataAccessException {
-		return sqlSession.insert("mapper.token.insertOneLogInToken", tokenVO);
+	public int insertOneLogInToken(LogInTokenVO logInTokenVO) throws DataAccessException {
+		return sqlSession.insert("mapper.logInToken.insertOneLogInToken", logInTokenVO);
 	}
 
-	public TokenVO selectOneRowByLogInToken(String logInToken) {
-		return sqlSession.selectOne("mapper.token.selectOneRowByLogInToken", logInToken);
+	public LogInTokenVO selectOneRowByLogInToken(String logInToken) {
+		return sqlSession.selectOne("mapper.logInToken.selectOneRowByLogInToken", logInToken);
+	}
+	
+	public int insertOneEmailCheckToken(EmailCheckTokenVO emailCheckTokenVO) throws DataAccessException {
+		return sqlSession.insert("mapper.emailCheckToken.insertOneEmailCheckToken", emailCheckTokenVO);
+	}
+
+	public EmailCheckTokenVO selectOneRowByEmailCheckToken(String emailCheckToken) {
+		return sqlSession.selectOne("mapper.emailCheckToken.selectOneRowByEmailCheckToken", emailCheckToken);
 	}
 }

@@ -15,18 +15,13 @@ import com.codepresso.mallpresso.repository.BannerDAO;
 @Service
 public class BannerService {
 
-	static Logger logger = LoggerFactory.getLogger(MemberService.class);
+	static Logger logger = LoggerFactory.getLogger(BannerService.class);
 
 	@Autowired
 	public BannerDAO bannerDAO;
 
-	@Autowired
-	public BannerVO bannerVO;
-
-	@Autowired
-	public ResponseVO responseVO;
-
 	public ResponseVO selectFiveLatestBanners() throws Exception {
+		ResponseVO responseVO = new ResponseVO();
 		List<BannerVO> bannerVOList = bannerDAO.selectFiveLatestBanners();
 		BannerVO[] bannerVOArray = new BannerVO[bannerVOList.size()];
 		for (int i = 0; i < bannerVOList.size(); i++) {
@@ -37,5 +32,4 @@ public class BannerService {
 		responseVO.setData(bannerVOArray);
 		return responseVO;
 	}
-
 }

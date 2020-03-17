@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.codepresso.mallpresso.domain.EmailCheckTokenVO;
+import com.codepresso.mallpresso.domain.LogInTokenVO;
 import com.codepresso.mallpresso.domain.MemberVO;
 import com.codepresso.mallpresso.domain.ResponseVO;
 import com.codepresso.mallpresso.repository.MemberDAO;
 import com.codepresso.mallpresso.repository.TokenDAO;
+import com.codepresso.mallpresso.util.TokenMaker;
 
 @Service
 public class MemberService {
@@ -26,6 +29,55 @@ public class MemberService {
 	@Autowired
 	public TokenDAO tokenDAO;
 
+	// 이메일 중복 확인
+	public ResponseVO insertOneEmailCheckToken(MemberVO emailOnlyVO) throws Exception {
+		ResponseVO responseVO = new ResponseVO();
+		EmailCheckTokenVO emailCheckTokenVO = new EmailCheckTokenVO();
+		MemberVO memberVO = new MemberVO();
+		String email = emailOnlyVO.getEmail();
+		memberVO = memberDAO.selectOneMemberByEmail(email);
+		if (memberVO == null) {
+			String emailCheckToken = TokenMaker.makeToken();
+			emailCheckTokenVO.setEmail(email);
+			emailCheckTokenVO.setEmailCheckToken(emailCheckToken);
+			tokenDAO.insertOneEmailCheckToken(emailCheckTokenVO);
+			emailCheckTokenVO = tokenDAO.selectOneRowByEmailCheckToken(emailCheckToken);
+			responseVO.setCode(HttpStatus.OK.value());
+			responseVO.setMessage("Success");
+			responseVO.setData(emailCheckTokenVO);
+		} else {
+			responseVO.setCode(HttpStatus.BAD_REQUEST.value());
+			responseVO.setMessage("Failure");
+			responseVO.setData(emailCheckTokenVO);
+		}
+		return responseVO;
+	}
+
+	// 로그인
+	public ResponseVO insertOneLogInToken(MemberVO memberVO) throws Exception {
+		LogInTokenVO logInTokenVO = new LogInTokenVO();
+		ResponseVO responseVO = new ResponseVO();
+		MemberVO memberVOInDB = memberDAO.selectOneMemberByEmailAndPassword(memberVO);
+		if (memberVOInDB == null) {
+			logger.info("ID-password pair not found.");
+			responseVO.setCode(HttpStatus.BAD_REQUEST.value());
+			responseVO.setMessage("Failure");
+			responseVO.setData(logInTokenVO);
+			return responseVO;
+		} else {
+			logInTokenVO.setEmail(memberVO.getEmail());
+			String logInToken = TokenMaker.makeToken();
+			logInTokenVO.setLogInToken(logInToken);
+			tokenDAO.insertOneLogInToken(logInTokenVO);
+			logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
+			responseVO.setCode(HttpStatus.OK.value());
+			responseVO.setMessage("Success");
+			responseVO.setData(logInTokenVO);
+			return responseVO;
+		}
+	}
+
+	// 회원 가입
 	public ResponseVO insertOneMember(String emailCheckToken, MemberVO memberVO) throws Exception {
 		ResponseVO responseVO = new ResponseVO();
 		MemberVO emptyMemberVO = new MemberVO();
