@@ -10,14 +10,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ProductVO {
+public class ProductAndBasketVO {
 
-	private long id;
-	private String name;
-	private String image;
-	private long originalPrice;
-	private long discountedPrice;
-	private String createdAt;
-	private Boolean isAdded;
+	private long memberID;
+	private long offsetValue;
 
 }

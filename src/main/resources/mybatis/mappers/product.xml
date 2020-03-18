@@ -16,18 +16,44 @@
 	<select id="selectSixProducts" resultMap="productResult"
 		parameterType="Long">
 	<![CDATA[ 
-	  SELECT * FROM product
-	  LEFT JOIN product
-	  ON product.id=b
-      ORDER BY id DESC
-      LIMIT 6
-      OFFSET #{lastProductID}
+	   SELECT * FROM product
+	   ORDER BY id DESC
+	   LIMIT 6
+	   OFFSET #{offsetValue}
 	]]>
+	</select>
+
+	<select id="selectSixProductsWithBasketInfo" resultMap="productResult"
+		parameterType="Long">
+	<![CDATA[ 
+	   SELECT
+	   	  p.id,
+	   	  p.name,
+	   	  p.image,
+	   	  p.original_price,
+	   	  p.discounted_price,
+	   	  p.created_at,
+	   	  b.member_id = #{memberID}
+	   FROM product as p
+	   LEFT OUTER JOIN basket as b
+	   ON p.id = b.product_id
+	   ORDER BY p.id DESC
+	   LIMIT 6
+	   OFFSET #{offsetValue}
+	]]>
+	</select>
+
+	<select id="selectOneProductByID" resultMap="productResult"
+		parameterType="Long">
+    <![CDATA[
+       SELECT * FROM product
+       WHERE id=#{id}
+    ]]>
 	</select>
 
 	<select id="selectAllProducts" resultMap="productResult">
     <![CDATA[
-      SELECT * FROM product
+       SELECT * FROM product
     ]]>
 	</select>
 

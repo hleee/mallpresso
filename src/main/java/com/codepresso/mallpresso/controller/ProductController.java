@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codepresso.mallpresso.domain.ResponseVO;
@@ -21,13 +21,14 @@ public class ProductController {
 	@Autowired
 	public ProductService productService;
 
-	// 여섯 개씩 조회
-	@RequestMapping(value = "/product/{lastProductID}", method = RequestMethod.GET)
+	// 여섯 개씩 조회 (한 페이지 호출)
+	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ResponseVO selectSixProducts(@CookieValue(value = "accesstoken", required = false) String logInToken,
-			@PathVariable("lastProductID") long lastProductID) throws Exception {
-		return productService.selectSixProducts(logInToken, lastProductID);
+			@RequestParam("page") Long page) throws Exception {
+		return productService.selectSixProducts(logInToken, page);
 	}
 
 	// 상세 조회
 
+	
 }
