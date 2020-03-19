@@ -13,6 +13,7 @@ import lombok.ToString;
 public class LogInTokenVO {
 
 	private String logInToken;
+	private long memberID;
 	private String email;
 	private String createdAt;
 

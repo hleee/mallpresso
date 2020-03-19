@@ -6,14 +6,15 @@
 <mapper namespace="mapper.logInToken">
 	<resultMap id="logInTokenResult" type="logInTokenVO">
 		<result property="logInToken" column="token" />
+		<result property="memberID" column="member_id" />
 		<result property="email" column="email" />
 		<result property="createdAt" column="created_at" />
 	</resultMap>
 
 	<insert id="insertOneLogInToken" parameterType="logInTokenVO">
     <![CDATA[
-      INSERT INTO log_in_token(token, email)
-      VALUES(#{logInToken}, #{email})
+      INSERT INTO log_in_token(token, member_id, email)
+      VALUES(#{logInToken}, #{memberID}, #{email})
     ]]>
 	</insert>
 

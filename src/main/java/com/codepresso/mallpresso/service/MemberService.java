@@ -65,11 +65,16 @@ public class MemberService {
 			responseVO.setData(logInTokenVO);
 			return responseVO;
 		} else {
-			logInTokenVO.setEmail(memberVO.getEmail());
+			String email = memberVO.getEmail();
+			logInTokenVO.setEmail(email);
 			String logInToken = TokenMaker.makeToken();
 			logInTokenVO.setLogInToken(logInToken);
+			long memberID = memberVOInDB.getId();
+			logger.info("memberID: " + memberID);
+			logInTokenVO.setMemberID(memberID);
 			tokenDAO.insertOneLogInToken(logInTokenVO);
 			logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
+			logger.info("logintoke: " + logInTokenVO);
 			responseVO.setCode(HttpStatus.OK.value());
 			responseVO.setMessage("Success");
 			responseVO.setData(logInTokenVO);

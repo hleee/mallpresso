@@ -23,20 +23,24 @@
 	]]>
 	</select>
 
-	<select id="selectSixProductsWithBasketInfo" resultMap="productResult"
+	<select id="selectSixProductsWithBasketInfo" resultType="productVO"
 		parameterType="Long">
 	<![CDATA[ 
 	   SELECT
-	   	  p.id,
-	   	  p.name,
-	   	  p.image,
-	   	  p.original_price,
-	   	  p.discounted_price,
-	   	  p.created_at,
-	   	  b.member_id = #{memberID}
-	   FROM product as p
-	   LEFT OUTER JOIN basket as b
-	   ON p.id = b.product_id
+	   	  p.id AS id,
+	   	  p.name AS name,
+	   	  p.image AS image,
+	   	  p.original_price AS originalPrice,
+	   	  p.discounted_price AS discountedPrice,
+	   	  p.created_at AS createdAt,
+	   	  IFNULL(
+				(
+				 SELECT b.id
+				 FROM basket AS b
+				 WHERE p.id = b.product_id
+				 AND b.member_id = #{memberID})
+             	 , 0) > 0 AS isAdded
+	   FROM product AS p
 	   ORDER BY p.id DESC
 	   LIMIT 6
 	   OFFSET #{offsetValue}
