@@ -18,4 +18,8 @@ public class BasketDAO {
 	public List<BasketVO> selectBasketByMemberID(long memberID) throws DataAccessException {
 		return sqlSession.selectList("mapper.basket.selectBasketByMemberID", memberID);
 	}
+
+	public BasketVO selectBasketByMemberIDAndProductID(BasketVO basketVO) throws DataAccessException {
+		return sqlSession.selectOne("mapper.basket.selectBasketByMemberIDAndProductID", basketVO);
+	}
 }

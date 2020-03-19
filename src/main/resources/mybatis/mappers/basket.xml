@@ -18,5 +18,14 @@
       WHERE member_id=#{memberID}
     ]]>
 	</select>
+	
+	<select id="selectBasketByMemberIDAndProductID" resultMap="basketResult"
+		parameterType="basketVO">
+    <![CDATA[
+      SELECT * FROM basket
+      WHERE member_id=#{memberID}
+      AND product_id=#{productID}
+    ]]>
+	</select>
 
 </mapper>

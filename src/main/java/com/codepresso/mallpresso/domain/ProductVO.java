@@ -15,6 +15,7 @@ public class ProductVO {
 	private long id;
 	private String name;
 	private String image;
+	private String description;
 	private long originalPrice;
 	private long discountedPrice;
 	private String createdAt;

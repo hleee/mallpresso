@@ -8,6 +8,7 @@
 		<result property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="image" column="image" />
+		<result property="description" column="description" />
 		<result property="originalPrice" column="original_price" />
 		<result property="discountedPrice" column="discounted_price" />
 		<result property="createdAt" column="created_at" />
@@ -23,13 +24,14 @@
 	]]>
 	</select>
 
-	<select id="selectSixProductsWithBasketInfo" resultType="productVO"
-		parameterType="Long">
+	<select id="selectSixProductsWithBasketInfo"
+		resultType="productVO" parameterType="Long">
 	<![CDATA[ 
 	   SELECT
 	   	  p.id AS id,
 	   	  p.name AS name,
 	   	  p.image AS image,
+	   	  p.description AS description,
 	   	  p.original_price AS originalPrice,
 	   	  p.discounted_price AS discountedPrice,
 	   	  p.created_at AS createdAt,
@@ -58,6 +60,15 @@
 	<select id="selectAllProducts" resultMap="productResult">
     <![CDATA[
        SELECT * FROM product
+    ]]>
+	</select>
+
+	<select id="selectAllDetails" resultType="detailVO"
+		parameterType="Long">
+    <![CDATA[
+       SELECT * FROM detail
+       WHERE product_id=#{productID}
+       ORDER BY id DESC
     ]]>
 	</select>
 

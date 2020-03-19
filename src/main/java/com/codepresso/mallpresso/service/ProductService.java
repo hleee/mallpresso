@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.codepresso.mallpresso.domain.BasketVO;
+import com.codepresso.mallpresso.domain.DetailVO;
 import com.codepresso.mallpresso.domain.LogInTokenVO;
 import com.codepresso.mallpresso.domain.ProductAndBasketVO;
 import com.codepresso.mallpresso.domain.ProductVO;
@@ -38,26 +40,52 @@ public class ProductService {
 	public ResponseVO selectSixProducts(String logInToken, long page) throws Exception {
 		ResponseVO responseVO = new ResponseVO();
 		long offsetValue = (page - 1) * 6;
-		List<ProductVO> productVOList = productDAO.selectSixProducts(offsetValue);
+		List<ProductVO> tokenNullProductVOList = productDAO.selectSixProducts(offsetValue);
 		if (logInToken == null) {
 			responseVO.setCode(HttpStatus.OK.value());
 			responseVO.setMessage("Success");
-			responseVO.setData(productVOList);
+			responseVO.setData(tokenNullProductVOList);
 		} else {
 			ProductAndBasketVO productAndBasketVO = new ProductAndBasketVO();
 			LogInTokenVO logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
 			long memberID = logInTokenVO.getMemberID();
 			productAndBasketVO.setOffsetValue(offsetValue);
 			productAndBasketVO.setMemberID(memberID);
-			List<ProductVO> productAndBasketVOList = productDAO.selectSixProductsWithBasketInfo(productAndBasketVO);
+			List<ProductVO> tokenNotNullProductVOList = productDAO.selectSixProductsWithBasketInfo(productAndBasketVO);
 			responseVO.setCode(HttpStatus.OK.value());
 			responseVO.setMessage("Success");
-			responseVO.setData(productAndBasketVOList);
+			responseVO.setData(tokenNotNullProductVOList);
 		}
 		return responseVO;
 	}
-	
-	// 상세 보기
-	
-	
+
+	// 상세 조회
+	public ResponseVO selectOneDetail(String logInToken, long productID) throws Exception {
+		ResponseVO responseVO = new ResponseVO();
+		BasketVO basketVO = new BasketVO();
+		LogInTokenVO logInTokenVO = new LogInTokenVO();
+		ProductVO productVO = productDAO.selectOneProductByID(productID);
+		if (logInToken == null) {
+			productVO.setIsAdded(null);
+		} else {
+			logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
+			long memberID = logInTokenVO.getMemberID();
+			basketVO.setMemberID(memberID);
+			basketVO.setProductID(productID);
+			basketVO = basketDAO.selectBasketByMemberIDAndProductID(basketVO);
+			if (basketVO != null) {
+				productVO.setIsAdded(true);
+			} else {
+				productVO.setIsAdded(false);
+			}
+		}
+		List<DetailVO> detailVOList = productDAO.selectAllDetails(productID);
+		Object[] productAndDetailArray = new Object[2];
+		productAndDetailArray[0] = productVO;
+		productAndDetailArray[1] = detailVOList;
+		responseVO.setCode(HttpStatus.OK.value());
+		responseVO.setMessage("Success");
+		responseVO.setData(productAndDetailArray);
+		return responseVO;
+	}
 }

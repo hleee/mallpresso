@@ -1,9 +1,8 @@
 package com.codepresso.mallpresso.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +15,6 @@ import com.codepresso.mallpresso.service.ProductService;
 @RequestMapping("/*")
 public class ProductController {
 
-	static Logger logger = LoggerFactory.getLogger(ProductController.class);
-
 	@Autowired
 	public ProductService productService;
 
@@ -29,6 +26,9 @@ public class ProductController {
 	}
 
 	// 상세 조회
-
-	
+	@RequestMapping(value = "/product/detail/{productID}", method = RequestMethod.GET)
+	public ResponseVO selectOneDetail(@CookieValue(value = "accesstoken", required = false) String logInToken,
+			@PathVariable("productID") Long productID) throws Exception {
+		return productService.selectOneDetail(logInToken, productID);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.codepresso.mallpresso.domain.DetailVO;
 import com.codepresso.mallpresso.domain.ProductAndBasketVO;
 import com.codepresso.mallpresso.domain.ProductVO;
 
@@ -31,5 +32,9 @@ public class ProductDAO {
 
 	public List<ProductVO> selectAllProducts() throws DataAccessException {
 		return sqlSession.selectList("mapper.product.selectAllProducts");
+	}
+
+	public List<DetailVO> selectAllDetails(long productID) throws DataAccessException {
+		return sqlSession.selectList("mapper.product.selectAllDetails", productID);
 	}
 }
