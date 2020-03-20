@@ -16,8 +16,8 @@
 * 한 상품의 사진과 설명을 볼 수 있는 상세 보기 창
 
 <div>
-<img width="350" src="https://user-images.githubusercontent.com/56017715/77142756-7064a600-6ac4-11ea-8b8c-f66c89eb8e7e.png">
-<img width="345" src="https://user-images.githubusercontent.com/56017715/77142709-5034e700-6ac4-11ea-8c0b-23695a5fd0ee.png">
+<img width="355" src="https://user-images.githubusercontent.com/56017715/77142756-7064a600-6ac4-11ea-8b8c-f66c89eb8e7e.png">
+<img width="355" src="https://user-images.githubusercontent.com/56017715/77142709-5034e700-6ac4-11ea-8c0b-23695a5fd0ee.png">
 </div>
 
 ## 사전 준비 사항
