@@ -35,6 +35,6 @@ public class ProductDAO {
 	}
 
 	public List<DetailVO> selectAllDetails(long productID) throws DataAccessException {
-		return sqlSession.selectList("mapper.product.selectAllDetails", productID);
+		return sqlSession.selectList("mapper.detail.selectAllDetails", productID);
 	}
 }

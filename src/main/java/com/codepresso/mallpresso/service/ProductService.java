@@ -12,6 +12,7 @@ import com.codepresso.mallpresso.domain.BasketVO;
 import com.codepresso.mallpresso.domain.DetailVO;
 import com.codepresso.mallpresso.domain.LogInTokenVO;
 import com.codepresso.mallpresso.domain.ProductAndBasketVO;
+import com.codepresso.mallpresso.domain.ProductAndDetailVO;
 import com.codepresso.mallpresso.domain.ProductVO;
 import com.codepresso.mallpresso.domain.ResponseVO;
 import com.codepresso.mallpresso.repository.BasketDAO;
@@ -65,8 +66,16 @@ public class ProductService {
 		BasketVO basketVO = new BasketVO();
 		LogInTokenVO logInTokenVO = new LogInTokenVO();
 		ProductVO productVO = productDAO.selectOneProductByID(productID);
+		ProductAndDetailVO productAndDetailVO = new ProductAndDetailVO();
+		productAndDetailVO.setId(productVO.getId());
+		productAndDetailVO.setName(productVO.getName());
+		productAndDetailVO.setImage(productVO.getImage());
+		productAndDetailVO.setDescription(productVO.getDescription());
+		productAndDetailVO.setOriginalPrice(productVO.getOriginalPrice());
+		productAndDetailVO.setDiscountedPrice(productVO.getDiscountedPrice());
+		productAndDetailVO.setCreatedAt(productVO.getCreatedAt());
 		if (logInToken == null) {
-			productVO.setIsAdded(null);
+			productAndDetailVO.setIsAdded(null);
 		} else {
 			logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
 			long memberID = logInTokenVO.getMemberID();
@@ -74,18 +83,16 @@ public class ProductService {
 			basketVO.setProductID(productID);
 			basketVO = basketDAO.selectBasketByMemberIDAndProductID(basketVO);
 			if (basketVO != null) {
-				productVO.setIsAdded(true);
+				productAndDetailVO.setIsAdded(true);
 			} else {
-				productVO.setIsAdded(false);
+				productAndDetailVO.setIsAdded(false);
 			}
 		}
 		List<DetailVO> detailVOList = productDAO.selectAllDetails(productID);
-		Object[] productAndDetailArray = new Object[2];
-		productAndDetailArray[0] = productVO;
-		productAndDetailArray[1] = detailVOList;
+		productAndDetailVO.setDetail(detailVOList);
 		responseVO.setCode(HttpStatus.OK.value());
 		responseVO.setMessage("Success");
-		responseVO.setData(productAndDetailArray);
+		responseVO.setData(productAndDetailVO);
 		return responseVO;
 	}
 }

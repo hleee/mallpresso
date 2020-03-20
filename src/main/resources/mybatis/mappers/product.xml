@@ -63,14 +63,5 @@
     ]]>
 	</select>
 
-	<select id="selectAllDetails" resultType="detailVO"
-		parameterType="Long">
-    <![CDATA[
-       SELECT * FROM detail
-       WHERE product_id=#{productID}
-       ORDER BY id DESC
-    ]]>
-	</select>
-
 </mapper>
 	

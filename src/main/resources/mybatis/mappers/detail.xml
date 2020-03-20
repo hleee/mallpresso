@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.detail">	
+	<resultMap id="detailResult" type="detailVO">
+		<result property="id" column="id" />
+		<result property="productID" column="product_id" />
+		<result property="description" column="description" />
+		<result property="image" column="image" />
+		<result property="createdAt" column="created_at" />
+	</resultMap>
+
+	<select id="selectAllDetails" resultMap="detailResult"
+		parameterType="Long">
+    <![CDATA[
+       SELECT * FROM detail
+       WHERE product_id=#{productID}
+       ORDER BY id DESC
+    ]]>
+	</select>
+
+</mapper>
+	
