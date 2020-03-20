@@ -10,7 +10,7 @@
 		<result property="productID" column="product_id" />
 		<result property="createdAt" column="created_at" />
 	</resultMap>
-	
+
 	<resultMap id="productResult" type="productVO">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
@@ -21,18 +21,20 @@
 		<result property="createdAt" column="created_at" />
 	</resultMap>
 
-	<select id="selectBasketByMemberID"
-		resultMap="productResult" parameterType="long">
+	<select id="selectBasketByMemberID" resultMap="productResult"
+		parameterType="long">
     <![CDATA[
-      SELECT *
+ 	  SELECT DISTINCT p.*
       FROM product AS p
+      JOIN basket AS b
+      ON p.id = b.product_id
       WHERE p.id
       IN (
       	  SELECT b.product_id
       	  FROM basket AS b
-      	  WHERE b.member_id = #{memberID}
-          ORDER BY b.created_at DESC
-	  );
+      	  WHERE b.member_id = 1
+	  	 )
+	  ORDER BY b.created_at DESC;
     ]]>
 	</select>
 
@@ -45,7 +47,7 @@
 
 	<delete id="deleteFromBasket" parameterType="basketVO">
     <![CDATA[
-      DELETE * FROM basket
+      DELETE FROM basket
       WHERE member_id=#{memberID}
       AND product_id=#{productID}
     ]]>
@@ -59,5 +61,5 @@
       AND product_id=#{productID}
     ]]>
 	</select>
-	
+
 </mapper>

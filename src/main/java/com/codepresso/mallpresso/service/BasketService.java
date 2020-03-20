@@ -36,14 +36,14 @@ public class BasketService {
 		LogInTokenVO logInTokenVO = tokenDAO.selectOneRowByLogInToken(logInToken);
 		long memberID = logInTokenVO.getMemberID();
 		List<ProductVO> basketList = basketDAO.selectBasketByMemberID(memberID);
-		ProductVO[] basketArray = new ProductVO[basketList.size()];
+		ProductVO[] productsInBasketArray = new ProductVO[basketList.size()];
 		for (int i = 0; i < basketList.size(); i++) {
 			basketList.get(i).setIsAdded(true);
-			basketArray[i] = basketList.get(i);
+			productsInBasketArray[i] = basketList.get(i);
 		}
 		responseVO.setCode(HttpStatus.OK.value());
 		responseVO.setMessage("Success");
-		responseVO.setData(basketArray);
+		responseVO.setData(productsInBasketArray);
 		return responseVO;
 	}
 
