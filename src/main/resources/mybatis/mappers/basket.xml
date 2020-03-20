@@ -10,22 +10,54 @@
 		<result property="productID" column="product_id" />
 		<result property="createdAt" column="created_at" />
 	</resultMap>
+	
+	<resultMap id="productResult" type="productVO">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="image" column="image" />
+		<result property="description" column="description" />
+		<result property="originalPrice" column="original_price" />
+		<result property="discountedPrice" column="discounted_price" />
+		<result property="createdAt" column="created_at" />
+	</resultMap>
 
-	<select id="selectBasketByMemberID" resultMap="basketResult"
-		parameterType="Long">
+	<select id="selectBasketByMemberID"
+		resultMap="productResult" parameterType="long">
     <![CDATA[
-      SELECT * FROM basket
-      WHERE member_id=#{memberID}
+      SELECT *
+      FROM product AS p
+      WHERE p.id
+      IN (
+      	  SELECT b.product_id
+      	  FROM basket AS b
+      	  WHERE b.member_id = #{memberID}
+          ORDER BY b.created_at DESC
+	  );
     ]]>
 	</select>
-	
-	<select id="selectBasketByMemberIDAndProductID" resultMap="basketResult"
-		parameterType="basketVO">
+
+	<insert id="insertToBasket" parameterType="basketVO">
+    <![CDATA[
+      INSERT INTO basket (member_id, product_id)
+      VALUES (#{memberID}, #{productID})
+    ]]>
+	</insert>
+
+	<delete id="deleteFromBasket" parameterType="basketVO">
+    <![CDATA[
+      DELETE * FROM basket
+      WHERE member_id=#{memberID}
+      AND product_id=#{productID}
+    ]]>
+	</delete>
+
+	<select id="selectBasketByMemberIDAndProductID"
+		resultMap="basketResult" parameterType="basketVO">
     <![CDATA[
       SELECT * FROM basket
       WHERE member_id=#{memberID}
       AND product_id=#{productID}
     ]]>
 	</select>
-
+	
 </mapper>
