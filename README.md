@@ -10,14 +10,14 @@
 이 플랫폼에서 지원되는 기능은 다음과 같다.
 * 연령 제한, 이메일 중복 확인, 비밀번호 재입력 기능이 지원되는 회원 가입
 * 로그인
-* 상품을 여섯 개씩 열람할 수 있는 페이지 메인 화면
+* 상품을 여섯 개씩 열람할 수 있는 메인 페이지 화면
 * 할인 정보를 공지하는 배너
 * 상품을 임시 저장할 수 있는 장바구니
 * 개별 상품의 사진과 설명을 볼 수 있는 상세 보기 창
 
 <div>
-<img width="355" src="https://user-images.githubusercontent.com/56017715/77142756-7064a600-6ac4-11ea-8b8c-f66c89eb8e7e.png">
-<img width="355" src="https://user-images.githubusercontent.com/56017715/77142709-5034e700-6ac4-11ea-8c0b-23695a5fd0ee.png">
+<img width="370" src="https://user-images.githubusercontent.com/56017715/77142756-7064a600-6ac4-11ea-8b8c-f66c89eb8e7e.png">
+<img width="370" src="https://user-images.githubusercontent.com/56017715/77142709-5034e700-6ac4-11ea-8c0b-23695a5fd0ee.png">
 </div>
 
 ## 사전 준비 사항
