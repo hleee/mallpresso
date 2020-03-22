@@ -35,6 +35,7 @@
 
 ## 시험, 빌드 및 실행 방법
 ![Workflow status](https://img.shields.io/badge/build-passing-brightgreen)
+![Open issues](https://img.shields.io/badge/open%20issues-2-yellow)
 
 이클립스 통합 개발 환경을 열고 부트 대시보드에서 해당 파일에 우클릭을 한다. 옵션이 표시되면 최상단의 시작하기 단추를 눌러 실행한다.  
 
