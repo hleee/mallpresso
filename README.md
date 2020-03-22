@@ -3,8 +3,8 @@
 ![Come in sign](https://user-images.githubusercontent.com/56017715/77141440-4315f900-6ac0-11ea-93eb-b2ac03ffeb6e.jpg)
 
 ## 프로젝트 소개
-[![GitHub version](https://badge.fury.io/gh/hleee%2Fmallpresso.svg?style=flat-square)](https://badge.fury.io/gh/hleee%2Fmallpresso)
-[![Release](https://img.shields.io/github/v/release/hleee/mallpresso?style=flat-square)]()  
+[![GitHub version](https://img.shields.io/badge/version-dev-brightgreen)](https://github.com/hleee/mallpresso)
+[![Release](https://img.shields.io/badge/release-1.0-blue)
 
 몰프레소(가명)는 코드프레소 해커톤의 일환으로 개발한 단순 전자 상업 서비스이다.   
 스프링 부트를 통해 전자 상거래의 기본적인 기능을 구현해 보았다.
@@ -27,14 +27,14 @@
 이 서비스를 가동하기 위해서는 아래와 같은 프로그램을 우선 설치하여야 한다.  
 | 프로그램 | 버전 정보 | 
 |---------|---------|
-| Eclipse IDE | [![Eclipse version](https://img.shields.io/badge/version-2019--09-blue?style=flat-square)](https://www.eclipse.org/downloads/packages/release/2019-09/r/eclipse-ide-java-developers) |
-| Java (JDK) | [![JDK version](https://img.shields.io/badge/version-1.8.0__221-blue?style=flat-square)](https://www.oracle.com/java/technologies/oracle-java-archive-downloads.html) |
-| Spring Tool Suite | [![STS version](https://img.shields.io/badge/version-3.9.11.RELEASE-blue?style=flat-square)](https://marketplace.eclipse.org/content/spring-tools-3-standalone-edition) |
-| MySQL | [![MySQL version](https://img.shields.io/badge/version-8.0.19-blue?style=flat-square)](https://dev.mysql.com/downloads/installer/) |
-| Lombok | [![Lombok version](https://img.shields.io/badge/version-1.18.10-blue?style=flat-square)](https://projectlombok.org/download) |
+| Eclipse IDE | [![Eclipse version](https://img.shields.io/badge/version-2019--09-blue)](https://www.eclipse.org/downloads/packages/release/2019-09/r/eclipse-ide-java-developers) |
+| Java (JDK) | [![JDK version](https://img.shields.io/badge/version-1.8.0__221-blue)](https://www.oracle.com/java/technologies/oracle-java-archive-downloads.html) |
+| Spring Tool Suite | [![STS version](https://img.shields.io/badge/version-3.9.11.RELEASE-blue)](https://marketplace.eclipse.org/content/spring-tools-3-standalone-edition) |
+| MySQL | [![MySQL version](https://img.shields.io/badge/version-8.0.19-blue)](https://dev.mysql.com/downloads/installer/) |
+| Lombok | [![Lombok version](https://img.shields.io/badge/version-1.18.10-blue)](https://projectlombok.org/download) |
 
 ## 시험, 빌드 및 실행 방법
-[![Workflow status](https://img.shields.io/github/workflow/status/hleee/mallpresso/master?style=flat-square)
+![Workflow status](https://img.shields.io/badge/build-passing-brightgreen)
 
 이클립스 통합 개발 환경을 열고 부트 대시보드에서 해당 파일에 우클릭을 한다. 옵션이 표시되면 최상단의 시작하기 단추를 눌러 실행한다.  
 
@@ -42,7 +42,7 @@
 
 ## 개발자 정보
 자세한 정보나 다른 프로젝트에 대해선 개발자의 블로그를 참고한다.   
-[![Medium](https://img.shields.io/badge/medium-%40hleee-9cf?style=flat-square)](https://medium.com/@hleee)  
+[![Medium](https://img.shields.io/badge/medium-%40hleee-9cf)](https://medium.com/@hleee)  
 
 ## 저작권 및 라이선스
 :coffee: [CODEPRESSO &copy; 2020](https://github.com/code-presso)
