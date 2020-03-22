@@ -4,7 +4,7 @@
 
 ## 프로젝트 소개
 [![GitHub version](https://img.shields.io/badge/version-dev-brightgreen)](https://github.com/hleee/mallpresso)
-[![Release](https://img.shields.io/badge/release-1.0-blue)
+![Release](https://img.shields.io/badge/release-1.0-blue)
 
 몰프레소(가명)는 코드프레소 해커톤의 일환으로 개발한 단순 전자 상업 서비스이다.   
 스프링 부트를 통해 전자 상거래의 기본적인 기능을 구현해 보았다.
@@ -41,8 +41,7 @@
 ![Dashboard image](https://user-images.githubusercontent.com/56017715/77142903-dcdfa500-6ac4-11ea-81e1-bf1a69e027e4.png)
 
 ## 개발자 정보
-자세한 정보나 다른 프로젝트에 대해선 개발자의 블로그를 참고한다.   
-[![Medium](https://img.shields.io/badge/medium-%40hleee-9cf)](https://medium.com/@hleee)  
+자세한 정보나 다른 프로젝트에 대해선 개발자의 [블로그](https://medium.com/@hleee)를 참고한다.   
 
 ## 저작권 및 라이선스
 :coffee: [CODEPRESSO &copy; 2020](https://github.com/code-presso)
