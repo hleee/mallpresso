@@ -32,7 +32,7 @@
       IN (
       	  SELECT b.product_id
       	  FROM basket AS b
-      	  WHERE b.member_id = 1
+      	  WHERE b.member_id = #{memberID}
 	  	 )
 	  ORDER BY b.created_at DESC;
     ]]>
